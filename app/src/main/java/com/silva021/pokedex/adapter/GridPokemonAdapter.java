@@ -1,11 +1,10 @@
 package com.silva021.pokedex.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.util.Util;
 import com.silva021.pokedex.R;
+import com.silva021.pokedex.listener.RecyclerViewOnClickListener;
 import com.silva021.pokedex.model.Pokemon;
-import com.silva021.pokedex.utils.MyUtlis;
+import com.silva021.pokedex.ui.PokemonActivity;
 import com.silva021.pokedex.utils.PaletteListener;
 
 import java.util.List;
@@ -36,7 +34,12 @@ import java.util.List;
 public class GridPokemonAdapter extends RecyclerView.Adapter<GridPokemonAdapter.ViewHolder> {
     List<Pokemon> mPokemons;
     Context mContext;
-    private Palette.PaletteAsyncListener mListener;
+    private Palette.PaletteAsyncListener mPaletteListener;
+    private RecyclerViewOnClickListener mPokemonListener;
+
+    public void setPokemonListener(RecyclerViewOnClickListener mPokemonListener) {
+        this.mPokemonListener = mPokemonListener;
+    }
 
     public GridPokemonAdapter(Context mContext, List<Pokemon> mPokemons) {
         this.mPokemons = mPokemons;
@@ -68,7 +71,7 @@ public class GridPokemonAdapter extends RecyclerView.Adapter<GridPokemonAdapter.
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        mListener = new PaletteListener();
+                        mPaletteListener = new PaletteListener();
                         Palette.from(((BitmapDrawable) resource).getBitmap()).generate(palette1 -> {
                             assert palette1 != null;
                             holder.cardView.setCardBackgroundColor(palette1.getMutedColor(Color.YELLOW));
@@ -86,6 +89,10 @@ public class GridPokemonAdapter extends RecyclerView.Adapter<GridPokemonAdapter.
         return mPokemons.size();
     }
 
+    private Pokemon getItem(int position) {
+        return mPokemons.get(position);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtCode;
         TextView txtName;
@@ -98,6 +105,15 @@ public class GridPokemonAdapter extends RecyclerView.Adapter<GridPokemonAdapter.
             txtName = itemView.findViewById(R.id.txtName);
             imgPokemon = itemView.findViewById(R.id.imgPokemon);
             cardView = itemView.findViewById(R.id.cardview);
+
+
+            cardView.setOnClickListener(view -> {
+                Pokemon pokemon = getItem(getAdapterPosition());
+                if (mPokemonListener != null)
+                    mPokemonListener.onItemClick(view, pokemon);
+
+            });
+
         }
     }
 }
