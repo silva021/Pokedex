@@ -85,6 +85,15 @@
             app:layout_constraintTop_toBottomOf="@+id/txtCode"
             app:tint="#5DDFC6" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:id="@+id/recyclerViewPokemonType"
+            tools:listitem="@layout/layout_pokemon_type"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/pokemon_bottom_sheets" />

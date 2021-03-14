@@ -6,19 +6,28 @@ public class Pokemon implements Serializable {
     private String name;
     private String id;
     private String urlImage;
+    private Types types;
     private Stats stats;
     private Abilities abilities;
     private EggGroups eggGroups;
 
-    public Pokemon(String name, String id, String urlImage, Stats stats, Abilities abilities, EggGroups eggGroups) {
+    public Pokemon(String name, String id, String urlImage, Types types, Stats stats, Abilities abilities, EggGroups eggGroups) {
         this.name = name;
         this.id = id;
         this.urlImage = urlImage;
+        this.types = types;
         this.stats = stats;
         this.abilities = abilities;
         this.eggGroups = eggGroups;
     }
 
+    public Types getTypes() {
+        return types;
+    }
+
+    public void setTypes(Types types) {
+        this.types = types;
+    }
 
     public EggGroups getEggGroups() {
         return eggGroups;

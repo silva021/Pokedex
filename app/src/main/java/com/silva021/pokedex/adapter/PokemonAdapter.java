@@ -1,7 +1,6 @@
 package com.silva021.pokedex.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -26,12 +25,11 @@ import com.bumptech.glide.request.target.Target;
 import com.silva021.pokedex.R;
 import com.silva021.pokedex.listener.RecyclerViewOnClickListener;
 import com.silva021.pokedex.model.Pokemon;
-import com.silva021.pokedex.ui.PokemonActivity;
 import com.silva021.pokedex.utils.PaletteListener;
 
 import java.util.List;
 
-public class GridPokemonAdapter extends RecyclerView.Adapter<GridPokemonAdapter.ViewHolder> {
+public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHolder> {
     List<Pokemon> mPokemons;
     Context mContext;
     private Palette.PaletteAsyncListener mPaletteListener;
@@ -41,7 +39,7 @@ public class GridPokemonAdapter extends RecyclerView.Adapter<GridPokemonAdapter.
         this.mPokemonListener = mPokemonListener;
     }
 
-    public GridPokemonAdapter(Context mContext, List<Pokemon> mPokemons) {
+    public PokemonAdapter(Context mContext, List<Pokemon> mPokemons) {
         this.mPokemons = mPokemons;
         this.mContext = mContext;
     }
@@ -53,7 +51,7 @@ public class GridPokemonAdapter extends RecyclerView.Adapter<GridPokemonAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GridPokemonAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PokemonAdapter.ViewHolder holder, int position) {
         Pokemon pokemon = mPokemons.get(position);
 
         holder.txtName.setText(pokemon.getName());

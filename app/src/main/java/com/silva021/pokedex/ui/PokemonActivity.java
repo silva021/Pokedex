@@ -1,6 +1,7 @@
 package com.silva021.pokedex.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -12,14 +13,19 @@ import com.google.android.material.tabs.TabLayout;
 import com.silva021.pokedex.AboutPokemonFragment;
 import com.silva021.pokedex.BaseStatsPokemonFragment;
 import com.silva021.pokedex.R;
+import com.silva021.pokedex.adapter.PokemonTypeAdapter;
 import com.silva021.pokedex.adapter.ViewPagerPokemonAdapter;
 import com.silva021.pokedex.model.Pokemon;
+import com.silva021.pokedex.model.Type;
+
+import java.util.List;
 
 
 public class PokemonActivity extends AppCompatActivity {
     ImageView imgPokemon, imgLeftArrow;
     TextView txtName, txtCode;
     Pokemon pokemon;
+    RecyclerView recyclerViewPokemonType;
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
@@ -34,6 +40,7 @@ public class PokemonActivity extends AppCompatActivity {
         imgLeftArrow = findViewById(R.id.imgLeftArrow);
         txtName = findViewById(R.id.txtName);
         txtCode = findViewById(R.id.txtCode);
+        recyclerViewPokemonType = findViewById(R.id.recyclerViewPokemonType);
 
         if (getIntent() != null) {
             pokemon = (Pokemon) getIntent().getSerializableExtra("object");
@@ -74,6 +81,13 @@ public class PokemonActivity extends AppCompatActivity {
 
         txtName.setText(pokemon.getName());
         txtCode.setText(pokemon.getId());
+
+        initRecyclerViewPokemonType(pokemon.getTypes().getList());
+    }
+
+    private void initRecyclerViewPokemonType(List<Type> list) {
+        PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(list, getApplicationContext());
+        recyclerViewPokemonType.setAdapter(pokemonTypeAdapter);
     }
 
 }
