@@ -2,21 +2,21 @@ package com.silva021.pokedex;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BaseStatsPokemonFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.silva021.pokedex.model.Pokemon;
+
 public class BaseStatsPokemonFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private ProgressBar progressAttack, progressDefense, progressSpecialAttack, progressSpecialDefense, progressSpeed, progressTotal, progressHP;
+    private TextView txtAttack, txtDefense, txtSpecialAttack, txtSpecialDefense, txtSpeed, txtTotal, txtHP;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -25,18 +25,9 @@ public class BaseStatsPokemonFragment extends Fragment {
     private String mParam2;
 
     public BaseStatsPokemonFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment2.
-     */
-    // TODO: Rename and change types and number of parameters
     public static BaseStatsPokemonFragment newInstance(String param1, String param2) {
         BaseStatsPokemonFragment fragment = new BaseStatsPokemonFragment();
         Bundle args = new Bundle();
@@ -58,7 +49,55 @@ public class BaseStatsPokemonFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_stats_pokemon, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        progressAttack = view.findViewById(R.id.progressAttack);
+        progressDefense = view.findViewById(R.id.progressDefense);
+        progressHP = view.findViewById(R.id.progressHP);
+        progressSpecialAttack = view.findViewById(R.id.progressSpecialAttack);
+        progressSpecialDefense = view.findViewById(R.id.progressSpecialDefense);
+        progressSpeed = view.findViewById(R.id.progressSpeed);
+        progressTotal = view.findViewById(R.id.progressTotal);
+
+        txtAttack = view.findViewById(R.id.txtAttack);
+        txtDefense = view.findViewById(R.id.txtDefense);
+        txtHP = view.findViewById(R.id.txtHP);
+        txtSpecialAttack = view.findViewById(R.id.txtSpecialAttack);
+        txtSpecialDefense = view.findViewById(R.id.txtSpecialDefense);
+        txtSpeed = view.findViewById(R.id.txtSpeed);
+        txtTotal = view.findViewById(R.id.txtTotal);
+
+        Bundle data = getArguments();
+        Pokemon pokemon = (Pokemon) data.getSerializable("object");
+        updateView(pokemon);
+    }
+
+    private void updateView(Pokemon pokemon) {
+        updateView(progressHP, txtHP, pokemon.getStats().getHP());
+        updateView(progressAttack, txtAttack, pokemon.getStats().getAttack());
+        updateView(progressSpecialAttack, txtSpecialAttack, pokemon.getStats().getSpecialAttack());
+        updateView(progressDefense, txtDefense, pokemon.getStats().getDefense());
+        updateView(progressSpecialDefense, txtSpecialDefense, pokemon.getStats().getSpecialDefense());
+        updateView(progressSpeed, txtSpeed, pokemon.getStats().getSpeed());
+        updateView(progressTotal, txtTotal, pokemon.getStats().getTotal());
+    }
+
+    private void setDrawable(ProgressBar progressBar, int value) {
+        if (value <= 50)
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_red));
+        else
+            progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_green));
+
+    }
+
+    private void updateView(ProgressBar progressBar, TextView textView, int value) {
+        progressBar.setProgress(value);
+        textView.setText(String.valueOf(value));
+        setDrawable(progressBar, value);
     }
 }

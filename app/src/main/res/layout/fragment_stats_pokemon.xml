@@ -1,14 +1,273 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BaseStatsPokemonFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="ello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
 
+        <TextView
+            android:id="@+id/txtLabelHP"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:text="HP"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtHP"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="45"
+            android:textColor="@color/texto"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/txtLabelHP"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/txtLabelAttack"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Attack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLabelHP" />
+
+        <TextView
+            android:id="@+id/txtAttack"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="60"
+            android:textColor="@color/texto"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/txtLabelAttack"
+            app:layout_constraintTop_toTopOf="@+id/txtLabelAttack" />
+
+        <TextView
+            android:id="@+id/txtLabelDefense"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Defense"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLabelAttack" />
+
+        <TextView
+            android:id="@+id/txtDefense"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="48"
+            android:textColor="@color/texto"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/txtLabelDefense"
+            app:layout_constraintTop_toTopOf="@+id/txtLabelDefense" />
+
+        <TextView
+            android:id="@+id/txtLabelSpecialAttack"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Sp. Atk"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLabelDefense" />
+
+        <TextView
+            android:id="@+id/txtSpecialAttack"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="65"
+            android:textColor="@color/texto"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/txtLabelSpecialAttack"
+            app:layout_constraintTop_toTopOf="@+id/txtLabelSpecialAttack" />
+
+
+        <TextView
+            android:id="@+id/txtLabelSpecialDefense"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Sp. Def"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtSpecialAttack" />
+
+
+        <TextView
+            android:id="@+id/txtSpecialDefense"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="65"
+            android:textColor="@color/texto"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/txtLabelSpecialDefense"
+            app:layout_constraintTop_toTopOf="@+id/txtLabelSpecialDefense" />
+
+        <TextView
+            android:id="@+id/txtLabelSpeed"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Speed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLabelSpecialDefense" />
+
+        <TextView
+            android:id="@+id/txtSpeed"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="45"
+            android:textColor="@color/texto"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/txtLabelSpeed"
+            app:layout_constraintTop_toTopOf="@+id/txtLabelSpeed" />
+
+
+        <TextView
+            android:id="@+id/txtLabelTotal"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:text="Total"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLabelSpeed" />
+
+
+        <TextView
+            android:id="@+id/txtTotal"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="317"
+            android:textColor="@color/texto"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/txtLabelTotal"
+            app:layout_constraintTop_toTopOf="@+id/txtLabelTotal" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:progress="25"
+            android:id="@+id/progressTotal"
+            android:max="600"
+            android:progressDrawable="@drawable/progress_green"
+            app:layout_constraintBottom_toBottomOf="@+id/txtLabelTotal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtTotal"
+            app:layout_constraintTop_toTopOf="@+id/txtTotal" />
+
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/progressSpecialAttack"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:progress="25"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_red"
+            app:layout_constraintBottom_toBottomOf="@+id/txtLabelSpecialAttack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtSpecialAttack"
+            app:layout_constraintTop_toTopOf="@+id/txtSpecialAttack" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/progressSpeed"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:progress="25"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_red"
+            app:layout_constraintBottom_toBottomOf="@+id/txtLabelSpeed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtSpeed"
+            app:layout_constraintTop_toTopOf="@+id/txtSpeed" />
+
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:id="@+id/progressSpecialDefense"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:progress="25"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_red"
+            app:layout_constraintBottom_toBottomOf="@+id/txtLabelSpecialDefense"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtSpecialDefense"
+            app:layout_constraintTop_toTopOf="@+id/txtSpecialDefense" />
+
+        <ProgressBar
+            android:id="@+id/progressHP"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:progress="25"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_red"
+            app:layout_constraintBottom_toBottomOf="@+id/txtLabelHP"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtHP"
+            app:layout_constraintTop_toTopOf="@+id/txtHP" />
+
+        <ProgressBar
+            android:id="@+id/progressAttack"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:max="100"
+            android:progress="40"
+            android:progressDrawable="@drawable/progress_red"
+            app:layout_constraintBottom_toBottomOf="@+id/txtLabelAttack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtAttack"
+            app:layout_constraintTop_toTopOf="@+id/txtAttack" />
+
+
+        <ProgressBar
+            android:id="@+id/progressDefense"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:max="100"
+            android:progress="25"
+            android:progressDrawable="@drawable/progress_red"
+            app:layout_constraintBottom_toBottomOf="@+id/txtLabelDefense"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtDefense"
+            app:layout_constraintTop_toTopOf="@+id/txtDefense" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

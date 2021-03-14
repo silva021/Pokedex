@@ -19,7 +19,7 @@ import com.silva021.pokedex.model.Pokemon;
 public class PokemonActivity extends AppCompatActivity {
     ImageView imgPokemon, imgLeftArrow;
     TextView txtName, txtCode;
-
+    Pokemon pokemon;
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
@@ -36,7 +36,7 @@ public class PokemonActivity extends AppCompatActivity {
         txtCode = findViewById(R.id.txtCode);
 
         if (getIntent() != null) {
-            Pokemon pokemon = (Pokemon) getIntent().getSerializableExtra("object");
+            pokemon = (Pokemon) getIntent().getSerializableExtra("object");
             updateView(pokemon);
         }
 
@@ -48,8 +48,14 @@ public class PokemonActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
 
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object", pokemon);
+
         aboutPokemonFragment = new AboutPokemonFragment();
         baseStatsPokemonFragment = new BaseStatsPokemonFragment();
+
+        baseStatsPokemonFragment.setArguments(bundle);
+        aboutPokemonFragment.setArguments(bundle);
 
         tabLayout.setupWithViewPager(viewPager);
 
