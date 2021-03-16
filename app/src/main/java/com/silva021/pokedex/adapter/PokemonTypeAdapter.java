@@ -17,6 +17,13 @@ import java.util.List;
 public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.ViewHolder> {
     List<Type> mList;
     Context mContext;
+    boolean mDetails = false;
+
+    public PokemonTypeAdapter(List<Type> mList, Context mContext, boolean mDetails) {
+        this.mList = mList;
+        this.mContext = mContext;
+        this.mDetails = mDetails;
+    }
 
     public PokemonTypeAdapter(List<Type> mList, Context mContext) {
         this.mList = mList;
@@ -26,7 +33,13 @@ public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_pokemon_type, parent, false));
+        int layout;
+        if (viewType == 0)
+            layout = R.layout.layout_pokemon_type_details;
+        else
+            layout = R.layout.layout_pokemon_type;
+
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(layout, parent, false));
     }
 
     @Override
@@ -35,6 +48,15 @@ public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.
         holder.txtType.setText(type.getName());
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (mDetails)
+            return 0;
+        else
+            return 1;
+
+//        return super.getItemViewType(position);
+    }
 
     @Override
     public int getItemCount() {

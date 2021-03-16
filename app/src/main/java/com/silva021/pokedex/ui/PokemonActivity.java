@@ -86,7 +86,7 @@ public class PokemonActivity extends AppCompatActivity {
     }
 
     private void initRecyclerViewPokemonType(List<Type> list) {
-        PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(list, getApplicationContext());
+        PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(list, getApplicationContext(), true);
         recyclerViewPokemonType.setAdapter(pokemonTypeAdapter);
     }
 
