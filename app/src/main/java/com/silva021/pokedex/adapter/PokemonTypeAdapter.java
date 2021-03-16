@@ -35,6 +35,7 @@ public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.
         holder.txtType.setText(type.getName());
     }
 
+
     @Override
     public int getItemCount() {
         return mList.size();

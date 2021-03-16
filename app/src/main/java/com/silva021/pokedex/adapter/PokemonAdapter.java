@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.palette.graphics.Palette;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -80,6 +82,16 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
                 })
                 .into(holder.imgPokemon);
 
+        initRecycler(holder.recycler, pokemon);
+
+    }
+
+    private void initRecycler(RecyclerView recyclerView, Pokemon pokemon) {
+        PokemonTypeAdapter pokemonAdapter = new PokemonTypeAdapter(pokemon.getTypes().getList(), mContext);
+        recyclerView.setAdapter(pokemonAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
     }
 
     @Override
@@ -96,6 +108,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
         TextView txtName;
         CardView cardView;
         ImageView imgPokemon;
+        RecyclerView recycler;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,7 +116,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
             txtName = itemView.findViewById(R.id.txtName);
             imgPokemon = itemView.findViewById(R.id.imgPokemon);
             cardView = itemView.findViewById(R.id.cardview);
-
+            recycler = itemView.findViewById(R.id.recycler);
 
             cardView.setOnClickListener(view -> {
                 Pokemon pokemon = getItem(getAdapterPosition());

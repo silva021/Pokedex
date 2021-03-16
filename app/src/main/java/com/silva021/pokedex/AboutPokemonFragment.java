@@ -73,12 +73,11 @@ public class AboutPokemonFragment extends Fragment {
         updateAbilities(txtAbilities, pokemon.getAbilities());
     }
 
-    private void updateAbilities(TextView textView, Abilities abilities) {
-        String text = "";
-        for (Ability ability : abilities.getList()){
-            text += ability.getName() + ", ";
+    private void updateAbilities(TextView textView, @NonNull Abilities abilities) {
+        StringBuilder text = new StringBuilder();
+        for (int i = 0; i < abilities.getList().size(); i++) {
+            text.append(abilities.getList().get(i).getName()).append(((abilities.getList().size() -1)  != i) ? ", " : ".");
         }
-
-        textView.setText(text);
+        textView.setText(text.toString());
     }
 }
