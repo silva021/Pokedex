@@ -2,6 +2,7 @@ package com.silva021.pokedex.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -15,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.palette.graphics.Palette;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +27,7 @@ import com.bumptech.glide.request.target.Target;
 import com.silva021.pokedex.R;
 import com.silva021.pokedex.listener.RecyclerViewOnClickListener;
 import com.silva021.pokedex.model.Pokemon;
+import com.silva021.pokedex.utils.MyColor;
 import com.silva021.pokedex.utils.PaletteListener;
 
 import java.util.List;
@@ -55,12 +56,11 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull PokemonAdapter.ViewHolder holder, int position) {
         Pokemon pokemon = mPokemons.get(position);
-
+        final MyColor[] myColor = new MyColor[1];
         holder.txtName.setText(pokemon.getName());
         holder.txtCode.setText(pokemon.getId());
         Glide.with(mContext).
                 load(pokemon.getUrlImage())
-//                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.drawable.loading)
                 .listener(new RequestListener<Drawable>() {
                     @Override
@@ -74,20 +74,21 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
                         mPaletteListener = new PaletteListener();
                         Palette.from(((BitmapDrawable) resource).getBitmap()).generate(palette1 -> {
                             assert palette1 != null;
-                            holder.cardView.setCardBackgroundColor(palette1.getMutedColor(Color.YELLOW));
+                            myColor[0] = new MyColor(palette1.getMutedColor(Color.YELLOW));
+                            holder.cardView.setCardBackgroundColor(myColor[0].colorCardView());
                             holder.txtCode.setTextColor(palette1.getMutedSwatch().getTitleTextColor());
+                            holder.imgPokeball.setColorFilter(myColor[0].colorPokeball());
+                            initRecycler(holder.recycler, pokemon, myColor[0].colorType());
                         });
                         return false;
                     }
                 })
                 .into(holder.imgPokemon);
-
-        initRecycler(holder.recycler, pokemon);
-
     }
 
-    private void initRecycler(RecyclerView recyclerView, Pokemon pokemon) {
-        PokemonTypeAdapter pokemonAdapter = new PokemonTypeAdapter(pokemon.getTypes().getList(), mContext);
+
+    private void initRecycler(RecyclerView recyclerView, Pokemon pokemon, int color) {
+        PokemonTypeAdapter pokemonAdapter = new PokemonTypeAdapter(pokemon.getTypes().getList(), mContext, color);
         recyclerView.setAdapter(pokemonAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -107,7 +108,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
         TextView txtCode;
         TextView txtName;
         CardView cardView;
-        ImageView imgPokemon;
+        ImageView imgPokemon, imgPokeball;
         RecyclerView recycler;
 
         public ViewHolder(@NonNull View itemView) {
@@ -115,6 +116,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
             txtCode = itemView.findViewById(R.id.txtCode);
             txtName = itemView.findViewById(R.id.txtName);
             imgPokemon = itemView.findViewById(R.id.imgPokemon);
+            imgPokeball= itemView.findViewById(R.id.imgPokeball);
             cardView = itemView.findViewById(R.id.cardview);
             recycler = itemView.findViewById(R.id.recycler);
 

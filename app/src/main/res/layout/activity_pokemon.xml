@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout"
     android:background="@color/green"
     tools:context=".ui.PokemonActivity">
 
@@ -69,6 +70,7 @@
         <ImageView
             android:layout_width="250dp"
             android:layout_height="240dp"
+            android:id="@+id/imgPokeball"
             android:translationX="60dp"
             android:src="@drawable/ic_group_1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,6 +80,7 @@
         <ImageView
             android:layout_width="250dp"
             android:layout_height="240dp"
+            android:id="@+id/imgPokeball2"
             android:src="@drawable/ic_group_1"
             android:translationX="-100dp"
             android:translationY="90dp"
