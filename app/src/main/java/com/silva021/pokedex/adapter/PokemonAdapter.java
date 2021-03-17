@@ -2,9 +2,9 @@ package com.silva021.pokedex.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,14 +28,16 @@ import com.silva021.pokedex.R;
 import com.silva021.pokedex.listener.RecyclerViewOnClickListener;
 import com.silva021.pokedex.model.Pokemon;
 import com.silva021.pokedex.utils.MyColor;
-import com.silva021.pokedex.utils.PaletteListener;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHolder> {
     List<Pokemon> mPokemons;
     Context mContext;
-    private Palette.PaletteAsyncListener mPaletteListener;
     private RecyclerViewOnClickListener mPokemonListener;
 
     public void setPokemonListener(RecyclerViewOnClickListener mPokemonListener) {
@@ -65,20 +67,20 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        Toast.makeText(mContext, "falhou", Toast.LENGTH_SHORT).show();
+                        Log.e("Erro", "onLoadFailed - Erro ao carregar a foto");
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        mPaletteListener = new PaletteListener();
                         Palette.from(((BitmapDrawable) resource).getBitmap()).generate(palette1 -> {
                             assert palette1 != null;
-                            myColor[0] = new MyColor(palette1.getMutedColor(Color.YELLOW));
+                            myColor[0] = new MyColor(palette1.getLightMutedColor(Color.YELLOW));
                             holder.cardView.setCardBackgroundColor(myColor[0].colorCardView());
                             holder.txtCode.setTextColor(palette1.getMutedSwatch().getTitleTextColor());
                             holder.imgPokeball.setColorFilter(myColor[0].colorPokeball());
                             initRecycler(holder.recycler, pokemon, myColor[0].colorType());
+                            holder.cardView.setVisibility(View.VISIBLE);
                         });
                         return false;
                     }
@@ -105,27 +107,30 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.txtCode)
         TextView txtCode;
+        @BindView(R.id.txtName)
         TextView txtName;
+        @BindView(R.id.cardViewLayout)
         CardView cardView;
-        ImageView imgPokemon, imgPokeball;
+        @BindView(R.id.imgPokemon)
+        ImageView imgPokemon;
+        @BindView(R.id.imgPokeball)
+        ImageView imgPokeball;;
+        @BindView(R.id.recycler)
         RecyclerView recycler;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtCode = itemView.findViewById(R.id.txtCode);
-            txtName = itemView.findViewById(R.id.txtName);
-            imgPokemon = itemView.findViewById(R.id.imgPokemon);
-            imgPokeball= itemView.findViewById(R.id.imgPokeball);
-            cardView = itemView.findViewById(R.id.cardview);
-            recycler = itemView.findViewById(R.id.recycler);
+            ButterKnife.bind(this, itemView);
+            cardView.setOnClickListener(this::onClick);
 
-            cardView.setOnClickListener(view -> {
-                Pokemon pokemon = getItem(getAdapterPosition());
-                if (mPokemonListener != null)
-                    mPokemonListener.onItemClick(view, pokemon);
+        }
 
-            });
+        private void onClick(View view) {
+            Pokemon pokemon = getItem(getAdapterPosition());
+            if (mPokemonListener != null)
+                mPokemonListener.onItemClick(view, pokemon);
 
         }
     }

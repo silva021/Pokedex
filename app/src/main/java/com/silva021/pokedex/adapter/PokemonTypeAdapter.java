@@ -17,6 +17,9 @@ import com.silva021.pokedex.model.Type;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.ViewHolder> {
     List<Type> mList;
     Context mContext;
@@ -71,14 +74,15 @@ public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.
         return mList.size();
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.txtType)
         TextView txtType;
+        @BindView(R.id.linearLayout)
         LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtType = itemView.findViewById(R.id.txtType);
-            linearLayout = itemView.findViewById(R.id.cardview);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

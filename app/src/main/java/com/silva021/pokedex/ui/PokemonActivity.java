@@ -3,7 +3,6 @@ package com.silva021.pokedex.ui;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +22,11 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.silva021.pokedex.AboutPokemonFragment;
 import com.silva021.pokedex.BaseStatsPokemonFragment;
 import com.silva021.pokedex.R;
@@ -36,15 +39,35 @@ import com.silva021.pokedex.utils.PaletteListener;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class PokemonActivity extends AppCompatActivity {
-    ImageView imgPokemon, imgLeftArrow, imgPokeball, imgPokeball2;
-    TextView txtName, txtCode;
-    Pokemon pokemon;
+    @BindView(R.id.imgPokemon)
+    ImageView imgPokemon;
+    @BindView(R.id.imgLeftArrow)
+    ImageView imgLeftArrow;
+    @BindView(R.id.imgPokeball)
+    ImageView imgPokeball;
+    @BindView(R.id.imgPokeball2)
+    ImageView imgPokeball2;
+    @BindView(R.id.txtName)
+    TextView txtName;
+    @BindView(R.id.txtCode)
+    TextView txtCode;
+    @BindView(R.id.layout)
     CoordinatorLayout layout;
+    @BindView(R.id.recyclerViewPokemonType)
     RecyclerView recyclerViewPokemonType;
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+    @BindView(R.id.btnLike)
+    LikeButton btnLike;
+
+    Pokemon pokemon;
     private Palette.PaletteAsyncListener mPaletteListener;
 
     private AboutPokemonFragment aboutPokemonFragment;
@@ -54,14 +77,7 @@ public class PokemonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon);
-        imgPokemon = findViewById(R.id.imgPokemon);
-        imgLeftArrow = findViewById(R.id.imgLeftArrow);
-        txtName = findViewById(R.id.txtName);
-        txtCode = findViewById(R.id.txtCode);
-        layout = findViewById(R.id.layout);
-        imgPokeball = findViewById(R.id.imgPokeball);
-        imgPokeball2 = findViewById(R.id.imgPokeball2);
-        recyclerViewPokemonType = findViewById(R.id.recyclerViewPokemonType);
+        ButterKnife.bind(this);
 
         if (getIntent() != null) {
             pokemon = (Pokemon) getIntent().getSerializableExtra("object");
@@ -73,9 +89,23 @@ public class PokemonActivity extends AppCompatActivity {
                 finish()
         );
 
-        viewPager = findViewById(R.id.view_pager);
-        tabLayout = findViewById(R.id.tab_layout);
+        btnLike.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                showSnackBar("I liked this Pokémon");
+            }
 
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                showSnackBar("I didn't like this pokémon");
+            }
+        });
+
+        initViewPager();
+
+    }
+
+    private void initViewPager() {
         Bundle bundle = new Bundle();
         bundle.putSerializable("object", pokemon);
 
@@ -91,7 +121,10 @@ public class PokemonActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(aboutPokemonFragment, "About");
         viewPagerAdapter.addFragment(baseStatsPokemonFragment, "Base Stats");
         viewPager.setAdapter(viewPagerAdapter);
+    }
 
+    private void showSnackBar(String text) {
+        Snackbar.make(getCurrentFocus(), text, Snackbar.LENGTH_SHORT).setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE).show();
     }
 
     private void updateView(Pokemon pokemon) {

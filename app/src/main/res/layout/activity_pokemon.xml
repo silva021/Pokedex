@@ -30,12 +30,14 @@
                 app:tint="@color/white"
                 android:layout_marginStart="20dp" />
 
-            <ImageView
-                android:layout_width="25dp"
+
+            <com.like.LikeButton
+                app:icon_type="heart"
+                app:icon_size="25dp"
+                android:id="@+id/btnLike"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:src="@drawable/ic_like"
                 app:tint="@color/white"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
