@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,7 +74,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         Palette.from(((BitmapDrawable) resource).getBitmap()).generate(palette1 -> {
                             assert palette1 != null;
-                            myColor[0] = new MyColor(palette1.getLightMutedColor(Color.YELLOW));
+                            myColor[0] = new MyColor(palette1.getMutedColor(Color.YELLOW));
                             holder.cardView.setCardBackgroundColor(myColor[0].colorCardView());
                             holder.txtCode.setTextColor(palette1.getMutedSwatch().getTitleTextColor());
                             holder.imgPokeball.setColorFilter(myColor[0].colorPokeball());

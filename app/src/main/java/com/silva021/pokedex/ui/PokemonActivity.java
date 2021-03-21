@@ -85,8 +85,10 @@ public class PokemonActivity extends AppCompatActivity {
         }
 
 
-        imgLeftArrow.setOnClickListener(v ->
-                finish()
+        imgLeftArrow.setOnClickListener(v -> {
+                    finish();
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }
         );
 
         btnLike.setOnLikeListener(new OnLikeListener() {

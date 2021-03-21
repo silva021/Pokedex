@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         Intent intent = new Intent(this, PokemonActivity.class);
         intent.putExtra("object", pokemon);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
 }
