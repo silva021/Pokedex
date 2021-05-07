@@ -27,8 +27,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
-import com.silva021.pokedex.AboutPokemonFragment;
-import com.silva021.pokedex.BaseStatsPokemonFragment;
+import com.silva021.pokedex.ui.fragment.AboutPokemonFragment;
+import com.silva021.pokedex.ui.fragment.BaseStatsPokemonFragment;
 import com.silva021.pokedex.R;
 import com.silva021.pokedex.adapter.PokemonTypeAdapter;
 import com.silva021.pokedex.adapter.ViewPagerPokemonAdapter;
@@ -37,6 +37,7 @@ import com.silva021.pokedex.model.Type;
 import com.silva021.pokedex.utils.MyColor;
 import com.silva021.pokedex.utils.PaletteListener;
 
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -151,7 +152,7 @@ public class PokemonActivity extends AppCompatActivity {
                             imgPokeball.setColorFilter(myColor[0].colorPokeball());
                             imgPokeball2.setColorFilter(myColor[0].colorPokeball());
                             layout.getBackground().setTint(myColor[0].colorCardView());
-                            initRecyclerViewPokemonType(pokemon.getTypes().getList(), myColor[0].colorType());
+                            initRecyclerViewPokemonType(Arrays.asList(new Type(pokemon.getType1()), new Type(pokemon.getType2())), myColor[0].colorType());
                         });
                         return false;
                     }

@@ -1,4 +1,4 @@
-package com.silva021.pokedex;
+package com.silva021.pokedex.ui.fragment;
 
 import android.os.Bundle;
 
@@ -11,8 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.silva021.pokedex.model.Abilities;
-import com.silva021.pokedex.model.Ability;
+import com.silva021.pokedex.R;
 import com.silva021.pokedex.model.Pokemon;
 
 /**
@@ -70,14 +69,15 @@ public class AboutPokemonFragment extends Fragment {
     }
 
     private void updateView(Pokemon pokemon) {
-        updateAbilities(txtAbilities, pokemon.getAbilities());
+//        updateAbilities(txtAbilities, pokemon.getAbilities());
+        txtAbilities.setText("Quick Attack");
     }
 
-    private void updateAbilities(TextView textView, @NonNull Abilities abilities) {
-        StringBuilder text = new StringBuilder();
-        for (int i = 0; i < abilities.getList().size(); i++) {
-            text.append(abilities.getList().get(i).getName()).append(((abilities.getList().size() -1)  != i) ? ", " : ".");
-        }
-        textView.setText(text.toString());
-    }
+//    private void updateAbilities(TextView textView, @NonNull Abilities abilities) {
+//        StringBuilder text = new StringBuilder();
+//        for (int i = 0; i < abilities.getList().size(); i++) {
+//            text.append(abilities.getList().get(i).getName()).append(((abilities.getList().size() -1)  != i) ? ", " : ".");
+//        }
+//        textView.setText(text.toString());
+//    }
 }

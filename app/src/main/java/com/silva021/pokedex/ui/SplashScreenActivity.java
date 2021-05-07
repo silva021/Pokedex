@@ -25,9 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         Handler handler = new Handler();
 
         animateView();
-        handler.postDelayed(() -> {
-            openActivityMain();
-        }, 2000);
+        handler.postDelayed(this::openActivityMain, 2000);
     }
 
     private void animateView() {

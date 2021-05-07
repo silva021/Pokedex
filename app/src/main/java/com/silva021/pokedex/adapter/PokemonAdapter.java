@@ -26,8 +26,11 @@ import com.bumptech.glide.request.target.Target;
 import com.silva021.pokedex.R;
 import com.silva021.pokedex.listener.RecyclerViewOnClickListener;
 import com.silva021.pokedex.model.Pokemon;
+import com.silva021.pokedex.model.Type;
 import com.silva021.pokedex.utils.MyColor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -59,7 +62,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
         Pokemon pokemon = mPokemons.get(position);
         final MyColor[] myColor = new MyColor[1];
         holder.txtName.setText(pokemon.getName());
-        holder.txtCode.setText(pokemon.getId());
+        holder.txtCode.setText("#" + pokemon.getId());
         Glide.with(mContext).
                 load(pokemon.getUrlImage())
                 .placeholder(R.drawable.loading)
@@ -89,11 +92,20 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
 
 
     private void initRecycler(RecyclerView recyclerView, Pokemon pokemon, int color) {
-        PokemonTypeAdapter pokemonAdapter = new PokemonTypeAdapter(pokemon.getTypes().getList(), mContext, color);
+        PokemonTypeAdapter pokemonAdapter = new PokemonTypeAdapter(returnTypeList(Arrays.asList(new Type(pokemon.getType1()), new Type(pokemon.getType2()))), mContext, color);
         recyclerView.setAdapter(pokemonAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(linearLayoutManager);
+    }
 
+    private List<Type> returnTypeList(List<Type> types) {
+        List<Type> typeList = new ArrayList<>();
+        for (Type type : types) {
+            if (type.getName() != null)
+                typeList.add(type);
+        }
+
+        return typeList;
     }
 
     @Override
@@ -115,7 +127,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
         @BindView(R.id.imgPokemon)
         ImageView imgPokemon;
         @BindView(R.id.imgPokeball)
-        ImageView imgPokeball;;
+        ImageView imgPokeball;
+        ;
         @BindView(R.id.recycler)
         RecyclerView recycler;
 

@@ -13,13 +13,11 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.silva021.pokedex.R;
 import com.silva021.pokedex.adapter.PokemonAdapter;
+import com.silva021.pokedex.api.PokemonService;
+import com.silva021.pokedex.api.ServiceGenerator;
 import com.silva021.pokedex.listener.RecyclerViewOnClickListener;
-import com.silva021.pokedex.model.Abilities;
-import com.silva021.pokedex.model.Ability;
-import com.silva021.pokedex.model.EggGroup;
-import com.silva021.pokedex.model.EggGroups;
 import com.silva021.pokedex.model.Pokemon;
-import com.silva021.pokedex.model.Stats;
+import com.silva021.pokedex.model.Abilities;
 import com.silva021.pokedex.model.Type;
 import com.silva021.pokedex.model.Types;
 
@@ -30,6 +28,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewOnClickListener {
     private PokemonAdapter pokemonAdapter;
@@ -56,10 +57,22 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     }
 
     private List<Pokemon> returnList() {
+        ServiceGenerator.createService(PokemonService.class).getAllPokemon(1).enqueue(new Callback<List<Pokemon>>() {
+            @Override
+            public void onResponse(Call<List<Pokemon>> call, Response<List<Pokemon>> response) {
+                Toast.makeText(MainActivity.this, "Ok", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<List<Pokemon>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Erro" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         List<Pokemon> pokemons = new ArrayList<>();
-        pokemons.add(new Pokemon("Squirtle", "#007", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png", new Types(Collections.singletonList(new Type("Water"))), new Stats(44, 48, 65, 50, 64, 43), new Abilities(Arrays.asList(new Ability("Torrent"), new Ability("Rain-Dish"))), new EggGroups(Arrays.asList(new EggGroup("Monster"), new EggGroup("Water")))));
-        pokemons.add(new Pokemon("Chimchar", "#390", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/390.png", new Types(Collections.singletonList(new Type("Fire"))), new Stats(44, 58, 44, 58, 44, 61), new Abilities(Arrays.asList(new Ability("Blaze"), new Ability("Iron-Fist"))), new EggGroups(Arrays.asList(new EggGroup("Ground"), new EggGroup("Humanshape")))));
-        pokemons.add(new Pokemon("Treecko", "#252", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/252.png", new Types(Collections.singletonList(new Type("Grass"))), new Stats(40, 45, 35, 65, 55, 70), new Abilities(Arrays.asList(new Ability("Overgrow"), new Ability("Unburden"))), new EggGroups(Arrays.asList(new EggGroup("Monster"), new EggGroup("Plant")))));
+        pokemons.add(new Pokemon("007", "Squirtle", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png", "Water", null, 1, 0, new Abilities(44, 48, 65, 50, 64, 43)));
+        pokemons.add(new Pokemon("390", "Chimchar", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/390.png", "Water", null, 1, 0, new Abilities(44, 48, 65, 50, 64, 43)));
+        pokemons.add(new Pokemon("252", "Treecko",  "https://assets.pokemon.com/assets/cms2/img/pokedex/full/252.png", "Water", null, 1, 0, new Abilities(44, 48, 65, 50, 64, 43)));
         return pokemons;
     }
 

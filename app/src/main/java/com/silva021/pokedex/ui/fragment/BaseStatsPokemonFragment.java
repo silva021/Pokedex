@@ -1,4 +1,4 @@
-package com.silva021.pokedex;
+package com.silva021.pokedex.ui.fragment;
 
 import android.os.Bundle;
 
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.silva021.pokedex.R;
 import com.silva021.pokedex.model.Pokemon;
 
 public class BaseStatsPokemonFragment extends Fragment {
@@ -78,13 +79,13 @@ public class BaseStatsPokemonFragment extends Fragment {
     }
 
     private void updateView(Pokemon pokemon) {
-        updateView(progressHP, txtHP, pokemon.getStats().getHP());
-        updateView(progressAttack, txtAttack, pokemon.getStats().getAttack());
-        updateView(progressSpecialAttack, txtSpecialAttack, pokemon.getStats().getSpecialAttack());
-        updateView(progressDefense, txtDefense, pokemon.getStats().getDefense());
-        updateView(progressSpecialDefense, txtSpecialDefense, pokemon.getStats().getSpecialDefense());
-        updateView(progressSpeed, txtSpeed, pokemon.getStats().getSpeed());
-        updateView(progressTotal, txtTotal, pokemon.getStats().getTotal());
+        updateView(progressHP, txtHP, pokemon.getAbilities().getHP());
+        updateView(progressAttack, txtAttack, pokemon.getAbilities().getAttack());
+        updateView(progressSpecialAttack, txtSpecialAttack, pokemon.getAbilities().getSpecialAttack());
+        updateView(progressDefense, txtDefense, pokemon.getAbilities().getDefense());
+        updateView(progressSpecialDefense, txtSpecialDefense, pokemon.getAbilities().getSpecialDefense());
+        updateView(progressSpeed, txtSpeed, pokemon.getAbilities().getSpeed());
+        updateView(progressTotal, txtTotal, pokemon.getAbilities().getTotal());
     }
 
     private void setDrawable(ProgressBar progressBar, int value) {
