@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/layout"
     android:background="@color/green"
-    tools:context=".ui.PokemonActivity">
+    tools:context=".presenter.ui.PokemonActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

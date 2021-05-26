@@ -1,4 +1,4 @@
-package com.silva021.pokedex.model;
+package com.silva021.pokedex.domain.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,6 +1,6 @@
-package com.silva021.pokedex.api;
+package com.silva021.pokedex.data.api;
 
-import com.silva021.pokedex.model.Pokemon;
+import com.silva021.pokedex.domain.model.Pokemon;
 
 import java.util.List;
 
@@ -10,6 +10,6 @@ import retrofit2.http.Query;
 
 public interface PokemonService {
 
-    @GET("/")
+    @GET("api/pokemon/")
     Call<List<Pokemon>> getAllPokemon(@Query(value = "page") int page);
 }

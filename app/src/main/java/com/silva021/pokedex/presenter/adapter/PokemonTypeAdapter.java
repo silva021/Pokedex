@@ -1,4 +1,4 @@
-package com.silva021.pokedex.adapter;
+package com.silva021.pokedex.presenter.adapter;
 
 import android.content.Context;
 import android.os.Build;
@@ -13,7 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.silva021.pokedex.R;
-import com.silva021.pokedex.model.Type;
+import com.silva021.pokedex.domain.model.Type;
 
 import java.util.List;
 

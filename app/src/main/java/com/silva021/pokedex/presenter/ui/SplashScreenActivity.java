@@ -1,4 +1,4 @@
-package com.silva021.pokedex.ui;
+package com.silva021.pokedex.presenter.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.silva021.pokedex.R;
+import com.silva021.pokedex.presenter.ui.main.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,6 +18,7 @@ import butterknife.ButterKnife;
 public class SplashScreenActivity extends AppCompatActivity {
     @BindView(R.id.imgPokeball)
     ImageView imgPokeball;
+    SplashScreenActivity_ViewBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

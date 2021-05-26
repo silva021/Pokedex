@@ -1,15 +1,17 @@
-package com.silva021.pokedex.api;
+package com.silva021.pokedex.data.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ServiceGenerator {
+    private static String urlBase = "https://silva021-pokedex-api.herokuapp.com/";
+
     private static Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-//            .baseUrl("http://localhost:8090/api/pokemon/")
-            .baseUrl("http://192.168.172.2:8090/api/pokemon/")
+            .baseUrl(urlBase)
             .addConverterFactory(GsonConverterFactory.create());
     private static Retrofit retrofitInstance = retrofitBuilder.build();
 
-    public static <T> T createService(Class<T> serviceClass){
+    public static <T> T createService(Class<T> serviceClass) {
         return retrofitInstance.create(serviceClass);
     }
 }

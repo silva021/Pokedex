@@ -1,4 +1,4 @@
-package com.silva021.pokedex.adapter;
+package com.silva021.pokedex.presenter.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

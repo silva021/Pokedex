@@ -1,4 +1,4 @@
-package com.silva021.pokedex.ui;
+package com.silva021.pokedex.presenter.ui;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -27,17 +27,17 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
-import com.silva021.pokedex.ui.fragment.AboutPokemonFragment;
-import com.silva021.pokedex.ui.fragment.BaseStatsPokemonFragment;
+import com.silva021.pokedex.presenter.ui.fragment.AboutPokemonFragment;
+import com.silva021.pokedex.presenter.ui.fragment.BaseStatsPokemonFragment;
 import com.silva021.pokedex.R;
-import com.silva021.pokedex.adapter.PokemonTypeAdapter;
-import com.silva021.pokedex.adapter.ViewPagerPokemonAdapter;
-import com.silva021.pokedex.model.Pokemon;
-import com.silva021.pokedex.model.Type;
-import com.silva021.pokedex.utils.MyColor;
+import com.silva021.pokedex.presenter.adapter.PokemonTypeAdapter;
+import com.silva021.pokedex.presenter.adapter.ViewPagerPokemonAdapter;
+import com.silva021.pokedex.domain.model.Pokemon;
+import com.silva021.pokedex.domain.model.Type;
+import com.silva021.pokedex.utils.MyColorPokemon;
 import com.silva021.pokedex.utils.PaletteListener;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -85,7 +85,6 @@ public class PokemonActivity extends AppCompatActivity {
             updateView(pokemon);
         }
 
-
         imgLeftArrow.setOnClickListener(v -> {
                     finish();
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -131,7 +130,7 @@ public class PokemonActivity extends AppCompatActivity {
     }
 
     private void updateView(Pokemon pokemon) {
-        final MyColor[] myColor = new MyColor[1];
+        final MyColorPokemon[] myColorPokemon = new MyColorPokemon[1];
         Glide.with(getApplicationContext())
                 .load(pokemon.getUrlImage())
                 .placeholder(R.drawable.loading)
@@ -148,25 +147,35 @@ public class PokemonActivity extends AppCompatActivity {
                         mPaletteListener = new PaletteListener();
                         Palette.from(((BitmapDrawable) resource).getBitmap()).generate(palette1 -> {
                             assert palette1 != null;
-                            myColor[0] = new MyColor(palette1.getMutedColor(Color.YELLOW));
-                            imgPokeball.setColorFilter(myColor[0].colorPokeball());
-                            imgPokeball2.setColorFilter(myColor[0].colorPokeball());
-                            layout.getBackground().setTint(myColor[0].colorCardView());
-                            initRecyclerViewPokemonType(Arrays.asList(new Type(pokemon.getType1()), new Type(pokemon.getType2())), myColor[0].colorType());
+                            myColorPokemon[0] = new MyColorPokemon(palette1.getMutedColor(Color.YELLOW));
+                            initRecyclerViewPokemonType(pokemon, MyColorPokemon.colorType(pokemon.getType1()));
                         });
                         return false;
                     }
                 })
                 .into(imgPokemon);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            layout.getBackground().setTint(MyColorPokemon.colorCardView(pokemon.getType1()));
+        }
+        imgPokeball.setColorFilter(MyColorPokemon.colorPokeball(pokemon.getType1()));
+        imgPokeball2.setColorFilter(MyColorPokemon.colorPokeball(pokemon.getType1()));
         txtName.setText(pokemon.getName());
-        txtCode.setText(pokemon.getId());
+        txtCode.setText("#" + pokemon.getId());
 
     }
 
-    private void initRecyclerViewPokemonType(List<Type> list, int color) {
-        PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(list, getApplicationContext(), color, true);
+    private void initRecyclerViewPokemonType(Pokemon pokemon, int color) {
+        PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(returnListType(pokemon), getApplicationContext(), color, true);
         recyclerViewPokemonType.setAdapter(pokemonTypeAdapter);
+    }
+
+    List<Type> returnListType(Pokemon pokemon) {
+        List<Type> types = new ArrayList<>();
+        types.add(new Type(pokemon.getType1()));
+        if (pokemon.getType2() != null) {
+            types.add(new Type(pokemon.getType2()));
+        }
+        return types;
     }
 
 }

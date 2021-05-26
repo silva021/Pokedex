@@ -1,4 +1,4 @@
-package com.silva021.pokedex.ui.fragment;
+package com.silva021.pokedex.presenter.ui.fragment;
 
 import android.os.Bundle;
 
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.silva021.pokedex.R;
-import com.silva021.pokedex.model.Pokemon;
+import com.silva021.pokedex.domain.model.Pokemon;
 
 /**
  * A simple {@link Fragment} subclass.
