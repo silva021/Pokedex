@@ -1,4 +1,4 @@
-package com.silva021.pokedex.presenter.ui.main;
+package com.silva021.pokedex.presenter.ui.pokemons_type;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,13 +10,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.silva021.pokedex.R;
+import com.silva021.pokedex.domain.model.Pokemon;
+import com.silva021.pokedex.domain.utils.MyColorPokemon;
 import com.silva021.pokedex.presenter.adapter.PokemonAdapter;
 import com.silva021.pokedex.presenter.adapter.listener.PaginationListener;
 import com.silva021.pokedex.presenter.adapter.listener.RecyclerViewOnClickListener;
-import com.silva021.pokedex.domain.model.Pokemon;
 import com.silva021.pokedex.presenter.ui.pokemon.PokemonActivity;
 
 import java.util.ArrayList;
@@ -27,16 +29,18 @@ import butterknife.ButterKnife;
 
 import static com.silva021.pokedex.presenter.adapter.listener.PaginationListener.PAGE_START;
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewOnClickListener,
+public class PokemonTypeActivity extends AppCompatActivity implements RecyclerViewOnClickListener,
         SwipeRefreshLayout.OnRefreshListener {
     private PokemonAdapter mPokemonAdapter;
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
-    @BindView(R.id.floatingActionButton)
-    FloatingActionButton floatingActionButton;
+    @BindView(R.id.txtTypePokemon)
+    TextView txtTypePokemon;
+    @BindView(R.id.imgPokeball)
+    ImageView imgPokeball;
     @BindView(R.id.swipeRefresh)
     SwipeRefreshLayout mSwipeRefresh;
-    MainViewModel mViewModel;
+    PokemonTypeViewModel mViewModel;
     List<Pokemon> mPokemonList = new ArrayList<>();
 
     private boolean isLastPage = false;
@@ -47,10 +51,22 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pokemon_type);
         ButterKnife.bind(this);
-        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(PokemonTypeViewModel.class);
+
+        if (getIntent() != null) {
+            String pokemonType = getIntent().getStringExtra("type");
+            updateView(pokemonType);
+        }
+
         initRecycler();
+    }
+
+    private void updateView(String pokemonType) {
+        txtTypePokemon.setText(pokemonType);
+        txtTypePokemon.setTextColor(MyColorPokemon.colorType(pokemonType));
+        imgPokeball.setColorFilter(MyColorPokemon.colorPokeball(pokemonType));
     }
 
     private void initRecycler() {
@@ -60,13 +76,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         mPokemonAdapter.setPokemonListener(this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(gridLayoutManager);
-        getPokemonList(PAGE_START);
+        getPokemonByTypeList(PAGE_START);
         mRecyclerView.addOnScrollListener(new PaginationListener(gridLayoutManager) {
             @Override
             protected void loadMoreItems() {
                 isLoading = true;
                 currentPage++;
-                getPokemonList(currentPage);
+                getPokemonByTypeList(currentPage);
             }
 
             @Override
@@ -82,8 +98,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
     }
 
-    private void getPokemonList(int page) {
-        mViewModel.getAllPokemon(page).observe(this, pokemons -> {
+    private void getPokemonByTypeList(int page) {
+        mViewModel.getPokemonByType(page, txtTypePokemon.getText().toString()).observe(this, pokemons -> {
 
             if (currentPage != PAGE_START)
                 mPokemonAdapter.removeLoading();
@@ -113,6 +129,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         currentPage = PAGE_START;
         isLastPage = false;
         mPokemonAdapter.clear();
-        getPokemonList(currentPage);
+        getPokemonByTypeList(currentPage);
     }
 }

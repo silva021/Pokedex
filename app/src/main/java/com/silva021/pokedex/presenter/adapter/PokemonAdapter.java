@@ -1,7 +1,6 @@
 package com.silva021.pokedex.presenter.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -29,7 +28,7 @@ import com.silva021.pokedex.presenter.adapter.base.BaseViewHolder;
 import com.silva021.pokedex.presenter.adapter.listener.RecyclerViewOnClickListener;
 import com.silva021.pokedex.domain.model.Pokemon;
 import com.silva021.pokedex.domain.model.Type;
-import com.silva021.pokedex.utils.MyColorPokemon;
+import com.silva021.pokedex.domain.utils.MyColorPokemon;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,8 +55,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public void addPokemons(List<Pokemon> data) {
-        mPokemons.addAll(data);
-        notifyDataSetChanged();
+        if (data != null) {
+            mPokemons.addAll(data);
+            notifyDataSetChanged();
+        }
     }
 
     public void removeLoading() {
@@ -161,7 +162,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         public void onBind(int position) {
             super.onBind(position);
             Pokemon pokemon = mPokemons.get(position);
-            final MyColorPokemon[] myColorPokemon = new MyColorPokemon[1];
             txtName.setText(pokemon.getName());
             txtCode.setText("#" + pokemon.getId());
             cardView.setCardBackgroundColor(MyColorPokemon.colorCardView(pokemon.getType1()));
@@ -180,10 +180,8 @@ public class PokemonAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                             Palette.from(((BitmapDrawable) resource).getBitmap()).generate(palette1 -> {
                                 assert palette1 != null;
-                                myColorPokemon[0] = new MyColorPokemon(palette1.getMutedColor(Color.YELLOW));
                                 txtCode.setTextColor(palette1.getMutedSwatch().getTitleTextColor());
                                 initRecycler(recycler, pokemon, MyColorPokemon.colorType(pokemon.getType1()));
-                                cardView.setVisibility(View.VISIBLE);
                             });
                             return false;
                         }

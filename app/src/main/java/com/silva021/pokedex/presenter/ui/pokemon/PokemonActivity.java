@@ -1,15 +1,13 @@
-package com.silva021.pokedex.presenter.ui;
+package com.silva021.pokedex.presenter.ui.pokemon;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,15 +25,15 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
-import com.silva021.pokedex.presenter.ui.fragment.AboutPokemonFragment;
-import com.silva021.pokedex.presenter.ui.fragment.BaseStatsPokemonFragment;
+import com.silva021.pokedex.presenter.ui.pokemon.fragment.AboutPokemonFragment;
+import com.silva021.pokedex.presenter.ui.pokemon.fragment.BaseStatsPokemonFragment;
 import com.silva021.pokedex.R;
 import com.silva021.pokedex.presenter.adapter.PokemonTypeAdapter;
 import com.silva021.pokedex.presenter.adapter.ViewPagerPokemonAdapter;
 import com.silva021.pokedex.domain.model.Pokemon;
 import com.silva021.pokedex.domain.model.Type;
-import com.silva021.pokedex.utils.MyColorPokemon;
-import com.silva021.pokedex.utils.PaletteListener;
+import com.silva021.pokedex.domain.utils.MyColorPokemon;
+import com.silva021.pokedex.presenter.ui.pokemons_type.PokemonTypeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class PokemonActivity extends AppCompatActivity {
+public class PokemonActivity extends AppCompatActivity implements PokemonTypeAdapter.RecyclerViewClickListener {
     @BindView(R.id.imgPokemon)
     ImageView imgPokemon;
     @BindView(R.id.imgLeftArrow)
@@ -68,8 +66,7 @@ public class PokemonActivity extends AppCompatActivity {
     @BindView(R.id.btnLike)
     LikeButton btnLike;
 
-    Pokemon pokemon;
-    private Palette.PaletteAsyncListener mPaletteListener;
+    private Pokemon pokemon;
 
     private AboutPokemonFragment aboutPokemonFragment;
     private BaseStatsPokemonFragment baseStatsPokemonFragment;
@@ -130,7 +127,6 @@ public class PokemonActivity extends AppCompatActivity {
     }
 
     private void updateView(Pokemon pokemon) {
-        final MyColorPokemon[] myColorPokemon = new MyColorPokemon[1];
         Glide.with(getApplicationContext())
                 .load(pokemon.getUrlImage())
                 .placeholder(R.drawable.loading)
@@ -144,12 +140,7 @@ public class PokemonActivity extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        mPaletteListener = new PaletteListener();
-                        Palette.from(((BitmapDrawable) resource).getBitmap()).generate(palette1 -> {
-                            assert palette1 != null;
-                            myColorPokemon[0] = new MyColorPokemon(palette1.getMutedColor(Color.YELLOW));
-                            initRecyclerViewPokemonType(pokemon, MyColorPokemon.colorType(pokemon.getType1()));
-                        });
+                        initRecyclerViewPokemonType(pokemon, MyColorPokemon.colorType(pokemon.getType1()));
                         return false;
                     }
                 })
@@ -167,6 +158,7 @@ public class PokemonActivity extends AppCompatActivity {
     private void initRecyclerViewPokemonType(Pokemon pokemon, int color) {
         PokemonTypeAdapter pokemonTypeAdapter = new PokemonTypeAdapter(returnListType(pokemon), getApplicationContext(), color, true);
         recyclerViewPokemonType.setAdapter(pokemonTypeAdapter);
+        pokemonTypeAdapter.setRecyclerViewClickListener(this);
     }
 
     List<Type> returnListType(Pokemon pokemon) {
@@ -178,4 +170,11 @@ public class PokemonActivity extends AppCompatActivity {
         return types;
     }
 
+    @Override
+    public void onClickListener(String pokemonType) {
+        Intent intent = new Intent(this, PokemonTypeActivity.class);
+        intent.putExtra("type", pokemonType);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
 }

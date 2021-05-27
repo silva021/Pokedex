@@ -1,4 +1,4 @@
-package com.silva021.pokedex.utils;
+package com.silva021.pokedex.domain.utils;
 
 import android.graphics.Color;
 

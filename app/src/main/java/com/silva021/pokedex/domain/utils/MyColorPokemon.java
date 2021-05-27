@@ -1,19 +1,11 @@
-package com.silva021.pokedex.utils;
+package com.silva021.pokedex.domain.utils;
 
 import android.graphics.Color;
 
 
 public class MyColorPokemon {
-    private static int color;
-    private static int blue;
-    private static int red;
-    private static int green;
 
-    public MyColorPokemon(int color) {
-        blue = Color.blue(color);
-        red = Color.red(color);
-        green = Color.green(color);
-        this.color = color;
+    public MyColorPokemon() {
     }
 
 

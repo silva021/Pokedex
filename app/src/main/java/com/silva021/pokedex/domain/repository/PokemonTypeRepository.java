@@ -1,7 +1,5 @@
 package com.silva021.pokedex.domain.repository;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -15,22 +13,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainRepository {
+public class PokemonTypeRepository {
 
-    public LiveData<List<Pokemon>> getAllPokemon(int page) {
+    public LiveData<List<Pokemon>> getPokemonByType(int page, String type) {
         final MutableLiveData<List<Pokemon>> data = new MutableLiveData<>();
-        ServiceGenerator.createService(MyPokemonApiService.class).getAllPokemon(page).enqueue(new Callback<List<Pokemon>>() {
+        ServiceGenerator.createService(MyPokemonApiService.class).getAllPokemonByType(type, page).enqueue(new Callback<List<Pokemon>>() {
             @Override
             public void onResponse(Call<List<Pokemon>> call, Response<List<Pokemon>> response) {
                 data.setValue(response.body());
-                Log.d("MainRepository", "ok");
             }
 
             @Override
             public void onFailure(Call<List<Pokemon>> call, Throwable t) {
                 data.setValue(null);
-                Log.d("MainRepository", "deu merda em");
-
             }
         });
 

@@ -21,15 +21,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.ViewHolder> {
-    List<Type> mList;
-    Context mContext;
-    boolean mDetails = false;
-    long mColor;
+    private List<Type> mList;
+    private Context mContext;
+    private boolean mDetails = false;
+    private long mColor;
+    private RecyclerViewClickListener mRecyclerViewClickListener;
 
     public PokemonTypeAdapter(List<Type> mList, Context mContext, long mColor) {
         this.mList = mList;
         this.mContext = mContext;
         this.mColor = mColor;
+    }
+
+    public void setRecyclerViewClickListener(PokemonTypeAdapter.RecyclerViewClickListener mRecyclerViewClickListener) {
+        this.mRecyclerViewClickListener = mRecyclerViewClickListener;
     }
 
     public PokemonTypeAdapter(List<Type> mList, Context mContext, long mColor, boolean mDetails) {
@@ -83,6 +88,17 @@ public class PokemonTypeAdapter extends RecyclerView.Adapter<PokemonTypeAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            txtType.setOnClickListener(v -> onClickTextView(txtType.getText().toString()));
         }
+
+        private void onClickTextView(String type) {
+            if (mRecyclerViewClickListener != null) {
+                mRecyclerViewClickListener.onClickListener(type);
+            }
+        }
+    }
+
+    public interface RecyclerViewClickListener {
+        void onClickListener(String pokemonType);
     }
 }

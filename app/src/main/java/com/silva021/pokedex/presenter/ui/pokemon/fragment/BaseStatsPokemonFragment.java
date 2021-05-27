@@ -1,4 +1,4 @@
-package com.silva021.pokedex.presenter.ui.fragment;
+package com.silva021.pokedex.presenter.ui.pokemon.fragment;
 
 import android.os.Bundle;
 
