@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.silva021.pokedex.R;
-import com.silva021.pokedex.domain.model.Pokemon;
+import com.silva021.pokedex.domain.model.pokemon.Pokemon;
 
 public class BaseStatsPokemonFragment extends Fragment {
     private ProgressBar progressAttack, progressDefense, progressSpecialAttack, progressSpecialDefense, progressSpeed, progressTotal, progressHP;

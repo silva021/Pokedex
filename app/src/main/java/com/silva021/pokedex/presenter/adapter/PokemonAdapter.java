@@ -23,11 +23,11 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.silva021.pokedex.R;
-import com.silva021.pokedex.domain.model.Abilities;
+import com.silva021.pokedex.domain.model.pokemon.Abilities;
 import com.silva021.pokedex.presenter.adapter.base.BaseViewHolder;
 import com.silva021.pokedex.presenter.adapter.listener.RecyclerViewOnClickListener;
-import com.silva021.pokedex.domain.model.Pokemon;
-import com.silva021.pokedex.domain.model.Type;
+import com.silva021.pokedex.domain.model.pokemon.Pokemon;
+import com.silva021.pokedex.domain.model.pokemon.Type;
 import com.silva021.pokedex.domain.utils.MyColorPokemon;
 
 import java.util.ArrayList;

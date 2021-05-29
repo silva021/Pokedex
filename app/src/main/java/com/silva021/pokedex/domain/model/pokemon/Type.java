@@ -1,4 +1,4 @@
-package com.silva021.pokedex.domain.model;
+package com.silva021.pokedex.domain.model.pokemon;
 
 import java.io.Serializable;
 

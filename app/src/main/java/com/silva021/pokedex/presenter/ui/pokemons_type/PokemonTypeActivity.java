@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.silva021.pokedex.R;
-import com.silva021.pokedex.domain.model.Pokemon;
+import com.silva021.pokedex.domain.model.pokemon.Pokemon;
 import com.silva021.pokedex.domain.utils.MyColorPokemon;
 import com.silva021.pokedex.presenter.adapter.PokemonAdapter;
 import com.silva021.pokedex.presenter.adapter.listener.PaginationListener;

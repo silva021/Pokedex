@@ -11,13 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pokedex">
-        <activity android:name=".presenter.ui.pokemons_type.PokemonTypeActivity"></activity>
-        <activity android:name=".presenter.ui.SplashScreenActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".presenter.ui.menu.MenuActivity">            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
+        <activity android:name=".presenter.ui.pokemons_type.PokemonTypeActivity" />
+        <activity android:name=".presenter.ui.SplashScreenActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".presenter.ui.pokemon.PokemonActivity">
 

@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.silva021.pokedex.data.api.MyPokemonApiService;
 import com.silva021.pokedex.data.api.ServiceGenerator;
-import com.silva021.pokedex.domain.model.Pokemon;
+import com.silva021.pokedex.domain.model.pokemon.Pokemon;
 
 import java.util.List;
 

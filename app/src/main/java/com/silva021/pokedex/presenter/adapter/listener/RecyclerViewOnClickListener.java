@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.silva021.pokedex.domain.model.Pokemon;
+import com.silva021.pokedex.domain.model.pokemon.Pokemon;
 
 public interface RecyclerViewOnClickListener {
     void onItemClick(@NonNull View view, @NonNull Pokemon pokemon);

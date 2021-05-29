@@ -30,8 +30,8 @@ import com.silva021.pokedex.presenter.ui.pokemon.fragment.BaseStatsPokemonFragme
 import com.silva021.pokedex.R;
 import com.silva021.pokedex.presenter.adapter.PokemonTypeAdapter;
 import com.silva021.pokedex.presenter.adapter.ViewPagerPokemonAdapter;
-import com.silva021.pokedex.domain.model.Pokemon;
-import com.silva021.pokedex.domain.model.Type;
+import com.silva021.pokedex.domain.model.pokemon.Pokemon;
+import com.silva021.pokedex.domain.model.pokemon.Type;
 import com.silva021.pokedex.domain.utils.MyColorPokemon;
 import com.silva021.pokedex.presenter.ui.pokemons_type.PokemonTypeActivity;
 

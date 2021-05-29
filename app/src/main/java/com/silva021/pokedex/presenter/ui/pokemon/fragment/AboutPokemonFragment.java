@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.silva021.pokedex.R;
-import com.silva021.pokedex.domain.model.Pokemon;
+import com.silva021.pokedex.domain.model.pokemon.Pokemon;
 
 /**
  * A simple {@link Fragment} subclass.

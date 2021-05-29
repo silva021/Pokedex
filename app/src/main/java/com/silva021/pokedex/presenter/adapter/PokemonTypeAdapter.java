@@ -13,7 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.silva021.pokedex.R;
-import com.silva021.pokedex.domain.model.Type;
+import com.silva021.pokedex.domain.model.pokemon.Type;
 
 import java.util.List;
 

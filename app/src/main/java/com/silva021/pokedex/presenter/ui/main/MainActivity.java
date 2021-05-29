@@ -16,7 +16,7 @@ import com.silva021.pokedex.R;
 import com.silva021.pokedex.presenter.adapter.PokemonAdapter;
 import com.silva021.pokedex.presenter.adapter.listener.PaginationListener;
 import com.silva021.pokedex.presenter.adapter.listener.RecyclerViewOnClickListener;
-import com.silva021.pokedex.domain.model.Pokemon;
+import com.silva021.pokedex.domain.model.pokemon.Pokemon;
 import com.silva021.pokedex.presenter.ui.pokemon.PokemonActivity;
 
 import java.util.ArrayList;

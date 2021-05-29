@@ -1,6 +1,6 @@
 package com.silva021.pokedex.data.api;
 
-import com.silva021.pokedex.domain.model.Pokemon;
+import com.silva021.pokedex.domain.model.pokemon.Pokemon;
 
 import java.util.List;
 
