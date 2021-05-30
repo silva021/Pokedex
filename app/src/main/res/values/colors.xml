@@ -10,5 +10,6 @@
     <color name="green">#48D0B0</color>
     <color name="red">#F44336</color>
     <color name="gray">#AFAFAF</color>
+    <color name="pokeball_background">#F5F5F6</color>
     <color name="texto">#303943</color>
 </resources>

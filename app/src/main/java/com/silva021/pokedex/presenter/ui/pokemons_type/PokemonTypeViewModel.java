@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.silva021.pokedex.domain.model.pokemon.Pokemon;
-import com.silva021.pokedex.domain.repository.PokemonTypeRepository;
+import com.silva021.pokedex.domain.repository.PokemonRepository;
 
 import java.util.List;
 
 public class PokemonTypeViewModel extends ViewModel {
-    PokemonTypeRepository repository = new PokemonTypeRepository();
+    PokemonRepository repository = new PokemonRepository();
 
     public LiveData<List<Pokemon>> getPokemonByType(int page, String type) {
         return repository.getPokemonByType(page, type);

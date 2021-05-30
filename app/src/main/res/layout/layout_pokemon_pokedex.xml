@@ -43,7 +43,7 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:src="@drawable/ic_group_1"
-            android:translationX="20dp"
+            android:translationX="25dp"
             android:translationY="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -58,6 +58,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_margin="5dp"
             android:id="@+id/recycler"
             card_view:listitem="@layout/layout_pokemon_type"
             app:layout_constraintBottom_toBottomOf="parent"

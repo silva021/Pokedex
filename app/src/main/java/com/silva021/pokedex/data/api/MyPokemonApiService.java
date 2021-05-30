@@ -15,8 +15,9 @@ public interface MyPokemonApiService {
     Call<List<Pokemon>> getAllPokemon(@Query(value = "page") int page);
 
     @GET("api/pokemon/generation/{generation}")
-    Call<List<Pokemon>> getAllPokemonByGeneration(@Query(value = "page") int page, @Path("generation") int generation);
+    Call<List<Pokemon>> getAllPokemonByGeneration( @Path("generation") int generation, @Query(value = "page") int page);
 
     @GET("api/pokemon/type/{type}")
-    Call<List<Pokemon>> getAllPokemonByType(@Path("type") String type, @Query(value = "page") int page );
+    Call<List<Pokemon>> getAllPokemonByType(@Path("type") String type, @Query(value = "page") int page);
+
 }

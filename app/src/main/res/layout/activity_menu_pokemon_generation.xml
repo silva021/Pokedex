@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presenter.ui.menu.MenuActivity">
+    android:background="@color/white"
+    tools:context=".presenter.ui.pokemons_generation.menu.MenuPokemonGenerationActivity">
 
 
     <ImageView
@@ -16,30 +17,16 @@
         android:translationY="-100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="#F5F5F6" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="35dp"
-        android:text="What Pokemon are you looking for?"
-        android:textColor="@color/texto"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:tint="@color/pokeball_background" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60sp"
+        android:background="@color/white"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
         app:spanCount="2"
-        tools:listitem="@layout/layout_menu_item" />
+        tools:listitem="@layout/layout_menu_generation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

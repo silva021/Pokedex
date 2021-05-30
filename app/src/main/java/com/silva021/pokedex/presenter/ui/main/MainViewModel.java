@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.silva021.pokedex.domain.model.pokemon.Pokemon;
-import com.silva021.pokedex.domain.repository.MainRepository;
+import com.silva021.pokedex.domain.repository.PokemonRepository;
 
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
-    private MainRepository mainRepository = new MainRepository();
+    private PokemonRepository mainRepository = new PokemonRepository();
     private MutableLiveData<List<Pokemon>> liveDataAllPokemon;
 
     public LiveData<List<Pokemon>> getAllPokemon(int page) {

@@ -53,6 +53,6 @@ public class MenuActivity extends AppCompatActivity implements MenuAdapter.OnCli
     @Override
     public void onClickListener(Menu menu) {
         startActivity(new Intent(this, menu.getActivityClass()));
-        finish();
+//        finish();
     }
 }
