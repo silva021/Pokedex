@@ -26,4 +26,4 @@ Ao clicar em um pokemon, um detalhamento sobre ele será aberto
 
 ## Lista de pokemon por tipo
 No detalhe do pokemon ao clicar em um tipo dele, a aplicação retornará uma lista de acordo com o tipo
-![ScreenShot](https://github.com/silva021/Pokedex/blob/master/assets/pokemon_list.jpg)
+![ScreenShot](https://github.com/silva021/Pokedex/blob/master/assets/pokemon_list_type.jpg)
